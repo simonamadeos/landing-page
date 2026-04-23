@@ -24,5 +24,4 @@ RUN composer install --no-dev --optimize-autoloader
 RUN mkdir -p /var/www/html/runtime /var/www/html/web/assets \
     && chown -R www-data:www-data /var/www/html/runtime /var/www/html/web/assets \
     && chmod -R 775 /var/www/html/runtime /var/www/html/web/assets
-
 EXPOSE 80
