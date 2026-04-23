@@ -1,0 +1,39 @@
+# IDE
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Composer
+/vendor/
+composer.phar
+
+# Environment (PENTING)
+.env
+.env.*
+
+# Runtime & cache (Yii)
+runtime/
+web/assets/
+
+# Config sensitif (opsional, kalau ada)
+config/db.php
+config/params-local.php
+
+# Logs & cache
+*.log
+*.cache
+
+# PHPUnit
+phpunit.phar
+/phpunit.xml
+tests/_output/
+tests/_support/_generated/
+
+# Vagrant
+.vagrant/
+
+# Node (kalau ada)
+node_modules/
