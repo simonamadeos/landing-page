@@ -17,7 +17,7 @@ RUN a2dismod mpm_event || true \
 RUN sed -i 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/000-default.conf
 
 # Allow .htaccess
-RUN sed -i '/<Directory \/var\/www\/>/,/AllowOverride/c\<Directory \/var\/www\/>\n\tAllowOverride All\n<\/Directory>' /etc/apache2/apache2.conf
+RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
