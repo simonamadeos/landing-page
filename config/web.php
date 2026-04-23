@@ -55,17 +55,17 @@ $config = [
     'params' => $params,
 ];
 
-if (YII_ENV_DEV && class_exists('yii\debug\Module')) {
+if (YII_ENV_DEV && class_exists('yii\\debug\\Module')) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
+        'class' => 'yii\\debug\\Module',
     ];
 }
 
-if (YII_ENV_DEV && class_exists('yii\gii\Module')) {
+if (YII_ENV_DEV && class_exists('yii\\gii\\Module')) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
+        'class' => 'yii\\gii\\Module',
     ];
 }
 
