@@ -9,8 +9,10 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod rewrite
 
 # Fix MPM (pakai prefork saja)
-RUN a2dismod mpm_event || true \
-    && a2dismod mpm_worker || true \
+RUN rm -f /etc/apache2/mods-enabled/mpm_event.load \
+    && rm -f /etc/apache2/mods-enabled/mpm_event.conf \
+    && rm -f /etc/apache2/mods-enabled/mpm_worker.load \
+    && rm -f /etc/apache2/mods-enabled/mpm_worker.conf \
     && a2enmod mpm_prefork
 
 # Set document root ke Yii web/
