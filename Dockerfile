@@ -20,7 +20,9 @@ WORKDIR /var/www/html
 # Install dependency Yii
 RUN composer install --no-dev --optimize-autoloader
 
-# Set permission
-RUN chown -R www-data:www-data /var/www/html/runtime /var/www/html/web/assets
+# 🔥 FIX DI SINI
+RUN mkdir -p /var/www/html/runtime /var/www/html/web/assets \
+    && chown -R www-data:www-data /var/www/html/runtime /var/www/html/web/assets \
+    && chmod -R 775 /var/www/html/runtime /var/www/html/web/assets
 
 EXPOSE 80
