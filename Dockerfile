@@ -1,24 +1,17 @@
-FROM php:8.2-apache
+FROM php:8.2.7-apache-bookworm
 
-# Install extension yang dibutuhkan Yii
+# Install dependency
 RUN apt-get update && apt-get install -y \
     git unzip libzip-dev zip \
     && docker-php-ext-install pdo pdo_mysql zip
 
-# 🔥 RESET MODULE APACHE (hindari MPM conflict total)
-RUN rm -f /etc/apache2/mods-available/mpm_event.* \
-    && rm -f /etc/apache2/mods-available/mpm_worker.* \
-    && rm -f /etc/apache2/mods-enabled/mpm_event.* \
-    && rm -f /etc/apache2/mods-enabled/mpm_worker.* \
-    && a2enmod mpm_prefork rewrite dir mime
-
-# Aktifkan module yang diperlukan saja
-RUN a2enmod mpm_prefork rewrite dir mime
+# Enable module penting saja
+RUN a2enmod rewrite
 
 # Set document root ke Yii web/
 RUN sed -i 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/000-default.conf
 
-# Aktifkan .htaccess (penting untuk Yii)
+# Aktifkan .htaccess
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 
 # Install Composer
@@ -32,13 +25,11 @@ WORKDIR /var/www/html
 # Install dependency Yii
 RUN composer install --no-dev --optimize-autoloader
 
-# Fix folder wajib Yii
+# Fix folder Yii
 RUN mkdir -p runtime web/assets \
     && chown -R www-data:www-data runtime web/assets \
     && chmod -R 775 runtime web/assets
 
-# Port default (Railway akan forward ke sini)
 EXPOSE 80
 
-# Jalankan Apache
 CMD ["apache2-foreground"]
