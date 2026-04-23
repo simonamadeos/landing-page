@@ -10,6 +10,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy project
 COPY . /app
+RUN ls -la /app/config
 
 WORKDIR /app
 
