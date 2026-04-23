@@ -2,14 +2,14 @@
 
 return [
     'class' => 'yii\db\Connection',
-    // Kita menggunakan getenv() untuk mengambil variabel yang ada di dashboard Railway
+    // Gunakan getenv() untuk mengambil data dari Railway
     'dsn' => 'mysql:host=' . getenv('MYSQLHOST') . ';port=' . getenv('MYSQLPORT') . ';dbname=' . getenv('MYSQLDATABASE'),
     'username' => getenv('MYSQLUSER'),
     'password' => getenv('MYSQLPASSWORD'),
-    'charset' => 'utf8',
+    'charset' => 'utf8mb4',
 
-    // Schema cache options (for production environment)
-    //'enableSchemaCache' => true,
-    //'schemaCacheDuration' => 60,
-    //'schemaCache' => 'cache',
+    // Schema cache options (opsional)
+    'enableSchemaCache' => true,
+    'schemaCacheDuration' => 60,
+    'schemaCache' => 'cache',
 ];
