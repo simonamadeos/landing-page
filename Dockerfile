@@ -7,7 +7,9 @@ RUN apt-get update && apt-get install -y \
 
 # Enable rewrite
 RUN a2enmod rewrite
-RUN a2dismod mpm_event mpm_worker || true \
+RUN a2dismod mpm_event || true \
+    && a2dismod mpm_worker || true \
+    && a2dismod mpm_prefork || true \
     && a2enmod mpm_prefork
 RUN sed -i 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/000-default.conf
 
